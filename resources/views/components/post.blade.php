@@ -30,13 +30,15 @@
     <span class="post-like-count" >
       {{ $post->like_cnt ?? 0 }}
     </span>
-    @isset($show)
-      <a href="/post/edit?id={{ $post->post_id }}"><i class="fas fa-edit icon-pointer"></i></a>
-      <i class="fas fa-trash-alt js-delete-icon icon-pointer" onclick="event.preventDefault();
-                 document.getElementById('destroy-form').submit();"></i>
-      <form id="destroy-form" action="/post/destroy?id={{ $post->post_id }}" method="POST" style="display: none;">
-        @csrf
-      </form>
+    @if (Auth::check() && $post->user_id === Auth::user()->id)
+      @isset($show)
+        <a href="/post/edit?id={{ $post->post_id }}"><i class="fas fa-edit icon-pointer"></i></a>
+        <i class="fas fa-trash-alt js-delete-icon icon-pointer" onclick="event.preventDefault();
+                   document.getElementById('destroy-form').submit();"></i>
+        <form id="destroy-form" action="/post/destroy?id={{ $post->post_id }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      @endisset
     @endif
   </div>
 </div>
