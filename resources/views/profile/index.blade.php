@@ -9,7 +9,7 @@
 @section('content')
   <div class="prof-top">
     <div class="prof-top-user">
-      <img src="{{ $user->profiles()->first()->img_filename ?? '/img/avatar/default.png' }}" alt="" class="prof-top-img">
+      <img src="{{ !empty($user->profiles()->first()->img_filename) ? $user->profiles()->first()->img_filename : '/img/avatar/default.png' }}" alt="" class="prof-top-img">
       <p class="prof-top-user-name">
         {{ $user->name }}
       </p>
