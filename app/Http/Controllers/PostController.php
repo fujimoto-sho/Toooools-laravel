@@ -8,6 +8,7 @@ use App\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -101,7 +102,8 @@ class PostController extends Controller
 
         $filename = '';
         if (isset($request->img)) {
-            $filename = '/storage/' . $request->img->store('/img/tool');
+            $filename = Storage::disk('s3')->putFile('img', $request->img, 'public');
+            $path = Storage::disk('s3')->url($filename);
         }
 
         $post = new Post;
@@ -109,7 +111,7 @@ class PostController extends Controller
         $post->name = $request->name;
         $post->introduction = $request->introduction;
         $post->url = $request->url;
-        $post->img_filename = $filename;
+        $post->img_filename = $path;
         $post->save();
         return redirect('/home')->with('flash_msg', '投稿しました');
     }
@@ -134,7 +136,8 @@ class PostController extends Controller
         $this->validate($request, Post::$rules);
 
         if (isset($request->img)) {
-            $filename = '/storage/' . $request->img->store('/img/tool');
+            $filename = Storage::disk('s3')->putFile('img', $request->img, 'public');
+            $path = Storage::disk('s3')->url($filename);
         }
 
         $post = Post::find($request->id);
@@ -142,7 +145,7 @@ class PostController extends Controller
         $post->name = $request->name;
         $post->introduction = $request->introduction;
         $post->url = $request->url;
-        $post->img_filename = $filename ?? $post->img_filename;
+        $post->img_filename = $path ?? $post->img_filename;
         $post->save();
         return redirect('/home')->with('flash_msg', '投稿を編集しました');
     }

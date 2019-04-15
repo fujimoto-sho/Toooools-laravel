@@ -9,6 +9,7 @@ use App\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -69,7 +70,7 @@ class ProfileController extends Controller
             'name' => $user->name,
             'bio' => !empty($profile->bio) ? $profile->bio : '',
             'like_tool' => !empty($profile->like_tool) ? $profile->like_tool : '',
-            'img' => !empty($profile->img_filename) ? $profile->img_filename : '/img/avatar/default.png',
+            'img' => !empty($profile->img_filename) ? Storage::disk('s3')->url($profile->img_filename) : '/img/avatar/default.png',
         ];
 
         return view('profile.edit', ['form' => $form]);
@@ -87,7 +88,8 @@ class ProfileController extends Controller
         ]);
 
         if (isset($request->img)) {
-            $filename = '/storage/' . $request->img->store('/img/avatar');
+            $filename = Storage::disk('s3')->putFile('img', $request->img, 'public');
+            $path = Storage::disk('s3')->url($filename);
         }
 
 
@@ -102,13 +104,13 @@ class ProfileController extends Controller
             $profile->user_id = Auth::user()->id;
             $profile->bio = $request->bio ?? '';
             $profile->like_tool = $request->like_tool ?? '';
-            $profile->img_filename = $filename ?? '';
+            $profile->img_filename = $path ?? '';
             $profile->save();
         } else {
             $profile = $profiles[0];
             $profile->bio = $request->bio ?? '';
             $profile->like_tool = $request->like_tool ?? '';
-            $profile->img_filename = $filename ?? $profile->img_filename;
+            $profile->img_filename = $path ?? $profile->img_filename;
             $profile->save();
         }
 
