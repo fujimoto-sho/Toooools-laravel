@@ -45,12 +45,11 @@ class PasswordResetNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->title)
-            ->line('aaa');
-//            ->view(
-//                'mail.html.passwordreset',
-//                [
-//                    'reset_url' => url('password/reset', $this->token),
-//                ]);
+            ->view(
+                'mail.html.passwordreset',
+                [
+                    'reset_url' => url('password/reset', $this->token),
+                ]);
     }
 
     /**
