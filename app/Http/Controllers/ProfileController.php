@@ -54,7 +54,7 @@ class ProfileController extends Controller
             'name' => $user->name,
             'bio' => !empty($profile->bio) ? $profile->bio : '',
             'like_tool' => !empty($profile->like_tool) ? $profile->like_tool : '',
-            'img' => !empty($profile->img_filename) ? Storage::disk('s3')->url($profile->img_filename) : '/img/avatar/default.png',
+            'img' => !empty($profile->img_filename) ? $profile->img_filename : '/img/avatar/default.png',
         ];
 
         return view('profile.edit', ['form' => $form]);
