@@ -35,7 +35,7 @@
             <i class="fas fa-reply"></i>
             reply
           </div>
-          <img src="{{ $reply->img_filename }}" alt="" class="post-user-img">
+          <img src="{{ empty($reply->img_filename) ? '/img/avatar/default.png' : $reply->img_filename }}" alt="" class="post-user-img">
           <p class="post-user-name">
             {{ $reply->user_name }}
           </p>
