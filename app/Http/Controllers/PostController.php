@@ -21,39 +21,12 @@ class PostController extends Controller
         $search_word = $request->search_word ?? '';
 
         $userId = Auth::user()->id ?? 0;
-        $queryLikes = DB::raw("(SELECT post_id, COUNT(*) like_cnt FROM likes GROUP BY post_id) likesCnt");
-        $queryReplies = DB::raw("(SELECT post_id, COUNT(*) reply_cnt FROM replies WHERE deleted_at is null GROUP BY post_id) repliesCnt");
-        $posts = Post::select(
-                'users.id AS user_id',
-                'users.name AS user_name',
-                'profiles.img_filename AS user_img',
-                'posts.id AS post_id',
-                'posts.name AS post_name',
-                'posts.introduction',
-                'posts.url',
-                'posts.img_filename AS post_img',
-                'posts.created_at',
-                'likesCnt.like_cnt',
-                'repliesCnt.reply_cnt',
-                'likes.id AS is_like',
-            )
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
-            ->leftJoin($queryLikes, 'likesCnt.post_id', '=', 'posts.id')
-            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id')
-            ->leftJoin('likes', function ($join) use ($userId) {
-                $join->on('likes.post_id', '=', 'posts.id')
-                    ->where('likes.user_id', '=', $userId);
-            });
-
+        $posts = Post::postItem($userId);
         if (!empty($search_word)) {
             $target = 'posts.name';
             if ($search_target === 'tool_introduction') $target = 'posts.introduction';
-
-
-            $posts->where($target, '=', $search_word);
+            $posts->where($target, 'LIKE', "%{$search_word}%");
         }
-
         switch ($order) {
             case 'create_desc':
                 $posts->orderBy('posts.created_at', 'DESC');
@@ -65,15 +38,12 @@ class PostController extends Controller
                 $posts->orderBy('likesCnt.like_cnt', 'DESC');
                 break;
         }
-
         $posts = $posts->paginate($onePage);
 
         $postCount = $posts->total();
         $pageCount = (int)($request->page ?? 1);
-        // 表示中の最小件数
         $minPostNum = (($pageCount - 1) * $onePage) + 1;
         if ($minPostNum < $postCount) $minPostNum = $postCount;
-        // 表示中の最大件数
         $maxPostNum = ($pageCount  * $onePage);
         if ($maxPostNum > $postCount) $maxPostNum = $postCount;
 
@@ -86,6 +56,7 @@ class PostController extends Controller
             'postCount' => $postCount,
             'posts' => $posts,
         ];
+
         return view('post.index', $param);
     }
 
@@ -122,15 +93,14 @@ class PostController extends Controller
 
     public function edit(Request $request)
     {
-        $posts = Post::where('id', '=', $request->id)
+        $post = Post::where('id', '=', $request->id)
             ->where('user_id', '=', Auth::user()->id)
-            ->get();
+            ->first();
 
-        if ($posts->isEmpty()) {
+        if (empty($post)) {
             return redirect('/post/create');
         }
 
-        $post = $posts[0];
         $post->img_filename = empty($post->img_filename) ? '/img/tool/default.png' : $post->img_filename;
         return view('post.edit', ['form' => $post, 'title' => '投稿編集']);
     }
@@ -157,30 +127,7 @@ class PostController extends Controller
     public function show(Request $request)
     {
         $userId = Auth::user()->id ?? 0;
-        $queryLikes = DB::raw("(SELECT post_id, COUNT(*) like_cnt FROM likes GROUP BY post_id) likesCnt");
-        $queryReplies = DB::raw("(SELECT post_id, COUNT(*) reply_cnt FROM replies WHERE deleted_at is null GROUP BY post_id) repliesCnt");
-        $post = Post::select(
-                'users.id AS user_id',
-                'users.name AS user_name',
-                'profiles.img_filename AS user_img',
-                'posts.id AS post_id',
-                'posts.name AS post_name',
-                'posts.introduction',
-                'posts.url',
-                'posts.img_filename AS post_img',
-                'posts.created_at',
-                'likesCnt.like_cnt',
-                'repliesCnt.reply_cnt',
-                'likes.id AS is_like',
-            )
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
-            ->leftJoin($queryLikes, 'likesCnt.post_id', '=', 'posts.id')
-            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id')
-            ->leftJoin('likes', function ($join) use ($userId) {
-                $join->on('likes.post_id', '=', 'posts.id')
-                    ->where('likes.user_id', '=', $userId);
-            })
+        $post = Post::postItem($userId)
             ->where('posts.id','=', $request->id)
             ->first();
 

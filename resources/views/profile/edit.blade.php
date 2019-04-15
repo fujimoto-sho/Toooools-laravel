@@ -7,7 +7,6 @@
 @include('layouts.header')
 
 @section('content')
-  <!-- フォーム -->
   <div class="form-container">
     <form class="form" method="post" action="/profile/edit" enctype="multipart/form-data">
       @csrf
@@ -53,7 +52,6 @@
         <input type="text" name="like_tool" value="{{ old('like_tool') ?? $form['like_tool'] }}">
       </label>
 
-      <!-- アバター -->
       @if ($errors->has('img'))
         <div class="input-msg">
           {{ $errors->first('img') }}

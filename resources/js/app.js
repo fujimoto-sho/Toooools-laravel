@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import Vue from 'vue';
-import axios from 'axios';
 
 $(function() {
   // フラッシュメッセージ
@@ -34,12 +32,12 @@ $(function() {
     $imagesContainer.css('border', 'none');
   });
 
+  // いいね送信
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  // いいね送信
   $('.js-like-icon').on('click', function() {
     $.ajax({
       type: "POST",

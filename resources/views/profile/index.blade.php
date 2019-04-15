@@ -7,7 +7,6 @@
 @include('layouts.header')
 
 @section('content')
-  <!-- プロフトップ -->
   <div class="prof-top">
     <div class="prof-top-user">
       <img src="{{ $user->profiles()->first()->img_filename ?? '/img/avatar/default.png' }}" alt="" class="prof-top-img">
@@ -37,7 +36,6 @@
 
   <div class="content-wrap">
 
-    <!-- サイドバー -->
     <div class="sidebar">
       <div class="prof-side-content">
         <p class="prof-side-content-title">自己紹介</p>
@@ -62,7 +60,6 @@
         @endif
     </div>
 
-    <!-- 投稿 -->
     <div class="post">
     @if(isset($posts))
         @foreach($posts as $post)

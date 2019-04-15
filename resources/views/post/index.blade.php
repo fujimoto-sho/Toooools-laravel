@@ -39,17 +39,16 @@
     </p>
   </div>
 
-  <!-- 投稿 -->
   <div class="post">
 
-      @if(isset($posts))
-          @foreach($posts as $post)
-            @include('components.post', ['post' => $post])
-          @endforeach
-          {{ $posts->appends(array('order' => $order, 'search_target' => $search_target, 'search_word' => $search_word))->links('vendor.pagination.default') }}
-      @else
-        検索結果がありません。
-      @endif
+    @if(isset($posts))
+      @foreach($posts as $post)
+        @include('components.post', ['post' => $post])
+      @endforeach
+      {{ $posts->appends(array('order' => $order, 'search_target' => $search_target, 'search_word' => $search_word))->links('vendor.pagination.default') }}
+    @else
+      検索結果がありません。
+    @endif
 
   </div>
 @endsection

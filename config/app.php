@@ -175,11 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /*
-         * 追加
-         */
-        // Laravel IDE helper
-//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
         Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class
 
     ],

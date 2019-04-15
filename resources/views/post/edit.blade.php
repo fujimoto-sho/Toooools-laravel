@@ -45,7 +45,6 @@
         <input type="text" name="url" value="{{ old('url') ?? $form['url'] }}">
       </label>
 
-      <!-- アバター -->
       @if ($errors->has('img'))
         <div class="input-msg">
           {{ $errors->first('img') }}

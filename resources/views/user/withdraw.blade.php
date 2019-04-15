@@ -7,7 +7,6 @@
 @include('layouts.header')
 
 @section('content')
-  <!-- フォーム -->
   <div class="form-container">
     <form class="form" method="post" action="/user/withdraw">
       @csrf
