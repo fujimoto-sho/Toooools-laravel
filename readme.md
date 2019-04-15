@@ -7,7 +7,10 @@ https://toooools-laravel.herokuapp.com/
 - メールアドレス
   - example@example.com
 - パスワード
-  - example
+  - testtest
+
+## 概要
+- フルスクラッチで作成した「Toooools（https://github.com/fujisho344/Toooools）」を、フレームワーク（Laravel）を使用して書き直しました
 
 ## 実装した機能
 - ユーザ登録
