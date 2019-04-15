@@ -10,7 +10,7 @@ https://toooools-laravel.herokuapp.com/
   - testtest
 
 ## 概要
-- フルスクラッチで作成した「Toooools（https://github.com/fujisho344/Toooools）」を、フレームワーク（Laravel）を使用して書き直しました
+- フルスクラッチで作成した「Toooools（ https://github.com/fujisho344/Toooools ）」を、フレームワーク（Laravel）を使用して書き直しました
 
 ## 実装した機能
 - ユーザ登録
