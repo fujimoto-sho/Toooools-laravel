@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '退会')
+@section('title', 'パスワード再発行')
 @section('column', 'one-column')
 
 @include('layouts.head')
