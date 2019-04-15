@@ -88,7 +88,7 @@ class PostController extends Controller
         $post->url = $request->url;
         $post->img_filename = $path;
         $post->save();
-        return redirect('/home')->with('flash_msg', '投稿しました');
+        return redirect('/post/show?id=' . $post->id)->with('flash_msg', '投稿しました');
     }
 
     public function edit(Request $request)
@@ -121,7 +121,7 @@ class PostController extends Controller
         $post->url = $request->url;
         $post->img_filename = $path ?? $post->img_filename;
         $post->save();
-        return redirect('/home')->with('flash_msg', '投稿を編集しました');
+        return redirect('/post/show?id=' . $post->id)->with('flash_msg', '投稿を編集しました');
     }
 
     public function show(Request $request)
