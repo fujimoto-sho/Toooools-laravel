@@ -86,7 +86,7 @@ class PostController extends Controller
         $post->name = $request->name;
         $post->introduction = $request->introduction;
         $post->url = $request->url;
-        $post->img_filename = $path;
+        $post->img_filename = $path ?? '';
         $post->save();
         return redirect('/post/show?id=' . $post->id)->with('flash_msg', '投稿しました');
     }

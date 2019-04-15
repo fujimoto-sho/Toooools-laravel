@@ -16,7 +16,9 @@
     <p class="post-tool-introduction">
       {{ $post->introduction }}
     </p>
-    <img src="{{ empty($post->post_img) ? '/img/tool/default.png' : $post->post_img }}" alt="ツール" class="post-tool-img">
+    <a href="{{ $post->url }}">
+      <img src="{{ (empty($post->post_img)) ? '/img/tool/default.png' : $post->post_img }}" alt="ツール" class="post-tool-img">
+    </a>
   </div>
   <div class="post-wrap-icon">
     <i class="fas fa-reply"></i>
