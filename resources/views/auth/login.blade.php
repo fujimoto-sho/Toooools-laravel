@@ -26,7 +26,7 @@
 
       <label class="form-label">
         パスワード
-        <input type="password" name="password" placeholder="英数字6文字以上" value="{{ old('password') }}" required>
+        <input type="password" name="password" placeholder="英数字8文字以上" value="{{ old('password') }}" required>
       </label>
 
       <label class="form-label-checkbox">
