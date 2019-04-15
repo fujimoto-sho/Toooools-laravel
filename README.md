@@ -26,7 +26,7 @@ https://toooools-laravel.herokuapp.com/
 - お気に入り登録
 
 ## 技術・環境
-- 言語：PHP、HTML、CSS、Scss、JavaScript、jQuery
+- 言語：PHP、HTML、CSS（Scss）、JavaScript（jQuery）
 - フレームワーク：Laravel
 - データベース：MySQL
 - バージョン管理：Git
