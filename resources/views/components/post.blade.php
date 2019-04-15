@@ -23,9 +23,10 @@
     <span class="post-reply-count">
       {{ $post->reply_cnt ?? 0 }}
     </span>
-    <i class="fas fa-heart js-like-icon icon-pointer {{ (isset($post->is_like)) ? 'fa-heart-active' : '' }}" data-post_id="{{ $post->post_id }}"></i>
-    <span class="post-like-count">
-      {{ $post->like_cnt }}
+    <i class="fas fa-heart js-like-icon icon-pointer {{ (isset($post->is_like)) ? 'fa-heart-active' : '' }}"
+       data-post_id="{{ $post->post_id }}" @click="sendLike"></i>
+    <span class="post-like-count" >
+      {{ $post->like_cnt ?? 0 }}
     </span>
     @isset($show)
       <a href="/post/edit?id={{ $post->post_id }}"><i class="fas fa-edit icon-pointer"></i></a>

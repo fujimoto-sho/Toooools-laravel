@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import Vue from 'vue';
+import axios from 'axios';
 
 $(function() {
   // フラッシュメッセージ
@@ -31,12 +33,12 @@ $(function() {
     reader.readAsDataURL(file);
     $imagesContainer.css('border', 'none');
   });
+
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
   // いいね送信
   $('.js-like-icon').on('click', function() {
     $.ajax({
@@ -52,8 +54,7 @@ $(function() {
           $(this).toggleClass('fa-heart-active');
           $(this).siblings('.post-like-count').text(data);
         }
-      })
-      .fail((data) => {});
+      });
   });
   // 投稿削除
   $('.js-delete-icon').on('click', function() {

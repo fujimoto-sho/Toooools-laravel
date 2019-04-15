@@ -15,8 +15,8 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $id = $request->id ?? Auth::user()->id;
-        $user = User::find($id);
+        $userId = $request->id ?? Auth::user()->id;
+        $user = User::find($userId);
         if (empty($user)) {
             return redirect('/');
         }
@@ -39,14 +39,17 @@ class ProfileController extends Controller
             )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
-            ->leftJoin('likes', 'likes.user_id', '=', 'users.id')
             ->leftJoin($queryLikes, 'likesCnt.post_id', '=', 'posts.id')
-            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id');
+            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id')
+            ->leftJoin('likes', function ($join) use ($userId) {
+                $join->on('likes.post_id', '=', 'posts.id')
+                    ->where('likes.user_id', '=', $userId);
+            });;
 
         if (!empty($request->isLikeShow)) {
-            $posts->where('likes.user_id', '=', $id);
+            $posts->where('likes.user_id', '=', $userId);
         } else {
-            $posts->where('posts.user_id', '=', $id);
+            $posts->where('posts.user_id', '=', $userId);
         }
 
         $posts->orderBy('posts.created_at', 'DESC');

@@ -6081,12 +6081,13 @@ button {
   height: 100%;
 }
 
-.pagination-item-now {
-  background-color: #AEC4E5;
-  color: #000;
+.pagenation-item-item-now {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.pagination-item-now a {
+.pagenation-item-item-now a {
   color: #000;
 }
 
@@ -6094,24 +6095,20 @@ button {
  * form
  *=============================*/
 
+.form {
+  width: 80%;
+  margin: 20px auto;
+}
+
 .form-container {
   width: 600px;
   margin: 0 auto;
   border: 5px solid #f1f1f1;
 }
 
-.form {
-  width: 80%;
-  margin: 20px auto;
-}
-
 .form-title {
   font-size: 2.5rem;
   text-align: center;
-}
-
-.input-msg {
-  color: #ff4f50;
 }
 
 .form-label {
@@ -6131,15 +6128,35 @@ button {
   resize: none;
 }
 
-.form-btn {
-  width: 100%;
-  margin-top: 40px;
-}
-
 .form-label-checkbox input,
 .form-label-checkbox span {
   display: inline-block;
   vertical-align: middle;
+}
+
+.form-label-file {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #f6f5f5;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 150px;
+}
+
+.form-label.err {
+  margin-top: 5px;
+}
+
+.form-label.err input,
+.form-label.err textarea {
+  background-color: #f7dcd9;
+}
+
+.form-btn {
+  width: 100%;
+  margin-top: 40px;
 }
 
 .form-link-list {
@@ -6158,17 +6175,6 @@ button {
   width: 150px;
   height: 150px;
   overflow: hidden;
-}
-
-.form-label-file {
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: #f6f5f5;
-  font-size: 1.2rem;
-  text-align: center;
-  line-height: 150px;
 }
 
 .form-input-container input {
@@ -6191,13 +6197,8 @@ button {
   left: 0;
 }
 
-.form-label.err {
-  margin-top: 5px;
-}
-
-.form-label.err input,
-.form-label.err textarea {
-  background-color: #f7dcd9;
+.input-msg {
+  color: #ff4f50;
 }
 
 /*===============================
@@ -6270,6 +6271,11 @@ button {
   top: 50px;
 }
 
+.prof-top-nav {
+  width: 980px;
+  margin: 0 auto;
+}
+
 .prof-top-nav-wrap {
   position: absolute;
   width: 100%;
@@ -6279,11 +6285,6 @@ button {
   overflow: hidden;
   z-index: 1;
   bottom: 0;
-}
-
-.prof-top-nav {
-  width: 980px;
-  margin: 0 auto;
 }
 
 .prof-top-nav ul {

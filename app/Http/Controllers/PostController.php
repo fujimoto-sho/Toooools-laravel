@@ -20,6 +20,7 @@ class PostController extends Controller
         $search_target = $request->search_target ?? 'tool_name';
         $search_word = $request->search_word ?? '';
 
+        $userId = Auth::user()->id ?? 0;
         $queryLikes = DB::raw("(SELECT post_id, COUNT(*) like_cnt FROM likes GROUP BY post_id) likesCnt");
         $queryReplies = DB::raw("(SELECT post_id, COUNT(*) reply_cnt FROM replies WHERE deleted_at is null GROUP BY post_id) repliesCnt");
         $posts = Post::select(
@@ -38,9 +39,12 @@ class PostController extends Controller
             )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
-            ->leftJoin('likes', 'likes.user_id', '=', 'users.id')
             ->leftJoin($queryLikes, 'likesCnt.post_id', '=', 'posts.id')
-            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id');
+            ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id')
+            ->leftJoin('likes', function ($join) use ($userId) {
+                $join->on('likes.post_id', '=', 'posts.id')
+                    ->where('likes.user_id', '=', $userId);
+            });
 
         if (!empty($search_word)) {
             $target = 'posts.name';
@@ -152,6 +156,7 @@ class PostController extends Controller
 
     public function show(Request $request)
     {
+        $userId = Auth::user()->id ?? 0;
         $queryLikes = DB::raw("(SELECT post_id, COUNT(*) like_cnt FROM likes GROUP BY post_id) likesCnt");
         $queryReplies = DB::raw("(SELECT post_id, COUNT(*) reply_cnt FROM replies WHERE deleted_at is null GROUP BY post_id) repliesCnt");
         $post = Post::select(
@@ -170,9 +175,12 @@ class PostController extends Controller
             )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
-            ->leftJoin('likes', 'likes.user_id', '=', 'users.id')
             ->leftJoin($queryLikes, 'likesCnt.post_id', '=', 'posts.id')
             ->leftJoin($queryReplies, 'repliesCnt.post_id', '=', 'posts.id')
+            ->leftJoin('likes', function ($join) use ($userId) {
+                $join->on('likes.post_id', '=', 'posts.id')
+                    ->where('likes.user_id', '=', $userId);
+            })
             ->where('posts.id','=', $request->id)
             ->first();
 
