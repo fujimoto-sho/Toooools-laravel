@@ -21,7 +21,7 @@ class ProfileController extends Controller
             return redirect('/');
         }
 
-        $posts = Post::postItem($userId);
+        $posts = Post::postItem(Auth::user()->id ?? 0);
 
         if (!empty($request->isLikeShow)) {
             $posts->where('likes.user_id', '=', $userId);
