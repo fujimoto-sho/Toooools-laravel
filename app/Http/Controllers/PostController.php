@@ -144,7 +144,7 @@ class PostController extends Controller
             ->leftJoin('users', 'users.id', '=', 'replies.user_id')
             ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
             ->where('post_id', '=', $request->id)
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->get();
 
         return view('post.show', ['post' => $post, 'replies' => $replies]);
