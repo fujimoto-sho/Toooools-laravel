@@ -43,7 +43,7 @@ class PostController extends Controller
         $postCount = $posts->total();
         $pageCount = (int)($request->page ?? 1);
         $minPostNum = (($pageCount - 1) * $onePage) + 1;
-        if ($minPostNum < $postCount) $minPostNum = $postCount;
+        if ($minPostNum > $postCount) $minPostNum = $postCount;
         $maxPostNum = ($pageCount  * $onePage);
         if ($maxPostNum > $postCount) $maxPostNum = $postCount;
 
