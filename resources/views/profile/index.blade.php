@@ -59,17 +59,17 @@
     </div>
 
     <div class="post">
-    @if(isset($posts))
-        @foreach($posts as $post)
-          @include('components.post', ['post' => $post])
-        @endforeach
+    @if($posts->isNotEmpty())
+      @foreach($posts as $post)
+        @include('components.post', ['post' => $post])
+      @endforeach
+    @else
+      @if (!empty(request()->isLikeShow))
+        いいねをした投稿がありません。
       @else
-        @if ($isLikeShow)
-          いいねをした投稿がありません。
-        @else
-          まだ投稿をしていません。
-        @endif;
+        まだ投稿をしていません。
       @endif
+    @endif
 
     </div>
 
