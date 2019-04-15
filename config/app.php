@@ -180,6 +180,7 @@ return [
          */
         // Laravel IDE helper
 //        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class
 
     ],
 
