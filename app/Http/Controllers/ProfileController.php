@@ -24,7 +24,11 @@ class ProfileController extends Controller
         $posts = Post::postItem(Auth::user()->id ?? 0);
 
         if (!empty($request->isLikeShow)) {
-            $posts->where('likes.user_id', '=', $userId);
+            $posts->leftJoin('likes AS likes_w', function ($join) use ($userId) {
+                    $join->on('likes_w.post_id', '=', 'posts.id')
+                        ->where('likes_w.user_id', '=', $userId);
+                })
+                ->where('likes_w.user_id', '=', $userId);
         } else {
             $posts->where('posts.user_id', '=', $userId);
         }
