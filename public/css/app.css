@@ -6059,15 +6059,15 @@ button {
 }
 
 /*===============================
- * pagenation
+ * pagination
  *=============================*/
 
-.pagenation {
+.pagination {
   font-weight: bold;
   text-align: center;
 }
 
-.pagenation-item {
+.pagination-item {
   display: inline-block;
   width: 30px;
   height: 40px;
@@ -6075,19 +6075,19 @@ button {
   line-height: 40px;
 }
 
-.pagenation-item a {
+.pagination-item a {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.pagenation-item-item-now {
+.pagination-item-now {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.pagenation-item-item-now a {
+.pagination-item-now a {
   color: #000;
 }
 
