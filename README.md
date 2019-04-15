@@ -1,7 +1,7 @@
-# Toooools（laravel）
+# Toooools（Laravel）
 
 ## URL
-https://toooools.herokuapp.com/
+https://toooools-laravel.herokuapp.com/
 
 ## テストユーザー
 - メールアドレス
