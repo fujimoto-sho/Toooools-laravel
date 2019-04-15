@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/profile/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+            <state relative-caret-position="195">
+              <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -556,7 +556,7 @@
       <workItem from="1554821517647" duration="1800000" />
       <workItem from="1554823588100" duration="1111000" />
       <workItem from="1554825011274" duration="121000" />
-      <workItem from="1554958773360" duration="102842000" />
+      <workItem from="1554958773360" duration="103004000" />
     </task>
     <task id="LOCAL-00001" summary="lang file">
       <created>1555351149231</created>
@@ -569,7 +569,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109183000" />
+    <option name="totallyTimeSpent" value="109345000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1034,8 +1034,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/profile/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+        <state relative-caret-position="195">
+          <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
         </state>
       </provider>
     </entry>

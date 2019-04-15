@@ -50,7 +50,7 @@
           {{ $user->profiles()->first()->like_tool ?? '' }}
         </p>
       </div>
-      @if (Auth::check() && Auth::user()->id === request()->id)
+      @if ( Auth::check() && ( Auth::user()->id == request()->id || empty(request()->id) ) )
         <div class="sidebar-line"></div>
         <button class="prof-side-btn"><a href="/profile/edit">プロフィール編集</a></button>
         <button class="prof-side-btn"><a href="/user/pass_edit">パスワード変更</a></button>
